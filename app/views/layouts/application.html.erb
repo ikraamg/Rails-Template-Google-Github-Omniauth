@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RailsCapstone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+  <nav class="navbar">
+  <%= link_to 'Home', root_path %>
+    <div class="">
+      <div class="nav-item">
+        <%= link_to 'Timeline', root_path, class:"nav-link"%>
+      </div>
+    </div>
+
+  <% if current_user %>
+    <br></br>
+    <p><%= current_user.name %></p>
+    <p><%= current_user.email %></p>
+  <%# <%= image_tag(current_user.image) unless current_user.image.nil? %>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+    <% else %>
+    <%= link_to 'Sign in', user_session_path %>
+  <% end %>
+  </nav>
+  <% if notice.present? %>
+      <div class="notice">
+        <p> <%= notice %> </p>
+      </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
